@@ -1,12 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Unwrap</title>
+  <!-- Styling will be written separately in styles.css -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Interactions will be written seperately in app.js -->
+   <script src = "app.js" defer></script>
 </head>
-<body>
-    <h1> Unwrap </h1>
 
+<body>
+    <header class="site-header">
+        <a class="logo" href="index.html" aria-label="Unwrap home">
+        Unwrap
+        </a>
+    </header>
+
+    <main>
+        <section class="landing-page" aria-labelledby="welcome-heading">
+            <div class="landing-content">
+                <h1 id="welcome-heading">Unwrap</h1>
+
+                <p>
+                    Discover your Spotify listening history and explore your music statistics.
+                </p>
+                <div class="landing-actions">
+                    <button id="login-button" type="button">
+                        Login with Spotify
+                    </button>
+
+                    <button id="about-button" type="button">
+                        About  Unwrap
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Unwrap</p>
+    </footer>
 </body>
 </html>
