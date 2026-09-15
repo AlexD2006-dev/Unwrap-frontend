@@ -12,6 +12,7 @@ loginButton.addEventListener("click", handleLoginClick);
 const aboutButton = document.querySelector("#about-button");
 function handleAboutClick() {
     console.log("About button clicked");
+    window.location.href = "about.html"
 }
 
 aboutButton.addEventListener("click", handleAboutClick);
