@@ -1,8 +1,8 @@
-.logo {
-  color: rgb(206, 129, 206);
-  text-decoration: none;
+.logo img {
+  width: 80px;
+  height: auto;
+  display: block;
 }
-/* This is temporary - will be replaced with image */
 
 body {
     background-color: rgb(43, 0, 77); 
