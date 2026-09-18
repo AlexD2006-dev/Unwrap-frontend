@@ -4,7 +4,7 @@
   "description": "Unwrap is a group project designed to help Spotify users explore their listening history and personal music statistics.",
   "main": "app.js",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest --environment jsdom" 
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
-function getPageForButton(buttonId) {
+export function getPageForButton(buttonId) {
     if (buttonId === "login-button") {
-        return "about.html";
+        return "dashboard.html";
     } else if (buttonId === "about-button") {
         return "about.html"
     } else {
@@ -17,16 +17,20 @@ function handleLoginClick() {
     window.location.href = page;
 }
 
-loginButton.addEventListener("click", handleLoginClick);
+if (loginButton) {
+    loginButton.addEventListener("click", handleLoginClick);
+}
 
 
 // This finds the about button
 const aboutButton = document.querySelector("#about-button");
 function handleAboutClick() {
     console.log("About button clicked");
-    const page = getPageForButton("about-button")
+    const page = getPageForButton("about-button");
     window.location.href = page;
 }
 
-aboutButton.addEventListener("click", handleAboutClick);
+if (aboutButton) {
+    aboutButton.addEventListener("click", handleAboutClick);
+}
 

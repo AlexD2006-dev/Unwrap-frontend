@@ -16,3 +16,6 @@ This project currently uses:
 - HTML for page structure
 - CSS for styling
 - JavaScript for interactions
+
+## Automated testing
+I added 2 automated tests to check whether my navigation buttons work and lead users to the correct pages.
