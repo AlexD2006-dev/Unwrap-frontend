@@ -1,0 +1,25 @@
+{
+  "name": "unwrap",
+  "version": "1.0.0",
+  "description": "Unwrap is a group project designed to help Spotify users explore their listening history and personal music statistics.",
+  "main": "app.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexD2006-dev/Unwrap-frontend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AlexD2006-dev/Unwrap-frontend/issues"
+  },
+  "homepage": "https://github.com/AlexD2006-dev/Unwrap-frontend#readme",
+  "devDependencies": {
+    "jsdom": "^29.1.1",
+    "vitest": "^4.1.11"
+  }
+}
