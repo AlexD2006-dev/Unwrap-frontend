@@ -1,3 +1,10 @@
+:root {
+    --background-purple: rgb(43, 0, 77);
+    --panel-purple: rgb(75, 25, 105);
+    --text-purple: rgb(206, 129, 206);
+    --hover-purple: rgb(225, 165, 225);
+}
+
 * {
     box-sizing: border-box;
 }
@@ -7,25 +14,19 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0;
-    background-color: rgb(43, 0, 77);
+    background-color: var(--background-purple);
     font-family: Arial, Helvetica, sans-serif;
-    color: rgb(206, 129, 206);
+    color: var(--text-purple);
+}
+
+button {
+    font: inherit;
 }
 
 .logo img {
     width: 80px;
     height: auto;
     display: block;
-}
-
-h1,
-p {
-    color: rgb(206, 129, 206);
-}
-
-ol {
-    display: inline-block;
-    text-align: left;
 }
 
 main {
@@ -37,7 +38,7 @@ main {
     text-align: center;
 }
 
-/* Landing page top panel */
+/* Top panel */
 
 .top-panel {
     position: relative;
@@ -46,8 +47,8 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(75, 25, 105);
-    border-bottom: 2px solid rgb(206, 129, 206);
+    background-color: var(--panel-purple);
+    border-bottom: 2px solid var(--text-purple);
     border-radius: 0 0 24px 24px;
 }
 
@@ -65,18 +66,18 @@ main {
 
 .hero-content h1 {
     margin: 0 0 20px;
-    color: rgb(206, 129, 206);
+    color: var(--text-purple);
     font-size: 4rem;
 }
 
 .hero-content p {
     margin: 0;
-    color: rgb(206, 129, 206);
+    color: var(--text-purple);
     font-size: 1.25rem;
     line-height: 1.5;
 }
 
-/* Landing page buttons */
+/* Landing page */
 
 .landing-content {
     width: min(100%, 620px);
@@ -96,20 +97,113 @@ main {
     padding: 15px 20px;
     border: 0;
     border-radius: 14px;
-    color: rgb(43, 0, 77);
-    background-color: rgb(206, 129, 206);
+    color: var(--background-purple);
+    background-color: var(--text-purple);
     font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
 }
 
 .landing-actions button:hover {
-    background-color: rgb(225, 165, 225);
+    background-color: var(--hover-purple);
 }
 
 .landing-actions button:focus-visible {
     outline: 3px solid white;
     outline-offset: 4px;
+}
+
+/* Dashboard statistics cards */
+
+.statistics-panel {
+    width: min(100%, 1000px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.statistics-card {
+    min-height: 260px;
+    padding: 30px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--panel-purple);
+    border: 2px solid var(--text-purple);
+    border-radius: 20px;
+    text-align: center;
+}
+
+.statistics-card h2 {
+    margin: 0 0 24px;
+    color: var(--text-purple);
+    font-size: 1.4rem;
+}
+
+.statistics-card p,
+.statistics-card ol {
+    margin: 0;
+    color: var(--text-purple);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.statistics-card ol {
+    padding-left: 24px;
+    text-align: left;
+    line-height: 1.8;
+}
+
+#tracked-songs-card {
+    grid-column: 1 / -1;
+    width: min(100%, 650px);
+    justify-self: center;
+    min-height: 190px;
+}
+
+/* About page cards */
+
+.about-panel {
+    width: min(100%, 1000px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.about-card {
+    min-height: 360px;
+    padding: 30px 26px;
+    background-color: var(--panel-purple);
+    border: 2px solid var(--text-purple);
+    border-radius: 20px;
+    text-align: left;
+}
+
+.about-card h2 {
+    margin: 0 0 24px;
+    color: var(--text-purple);
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+.about-card p,
+.about-card li {
+    color: var(--text-purple);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.about-card p {
+    margin: 0 0 18px;
+}
+
+.about-card ol {
+    margin: 0;
+    padding-left: 24px;
+    text-align: left;
 }
 
 /* Footer */
@@ -123,6 +217,25 @@ footer {
 }
 
 /* Smaller screens */
+
+@media (max-width: 750px) {
+    .statistics-panel,
+    .about-panel {
+        grid-template-columns: 1fr;
+    }
+
+    #tracked-songs-card {
+        width: 100%;
+    }
+
+    .statistics-card {
+        min-height: 210px;
+    }
+
+    .about-card {
+        min-height: auto;
+    }
+}
 
 @media (max-width: 600px) {
     .top-panel {
@@ -148,73 +261,5 @@ footer {
 
     main {
         padding-top: 40px;
-    }
-}
-
-/* Dashboard statistics cards */
-
-.statistics-panel {
-    width: min(100%, 1000px);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-}
-
-.statistics-card {
-    min-height: 260px;
-    padding: 30px 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(75, 25, 105);
-    border: 2px solid rgb(206, 129, 206);
-    border-radius: 20px;
-    text-align: center;
-}
-
-.statistics-card h2 {
-    margin: 0 0 24px;
-    color: rgb(206, 129, 206);
-    font-size: 1.4rem;
-}
-
-.statistics-card p,
-.statistics-card ol {
-    margin: 0;
-    color: rgb(206, 129, 206);
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-.statistics-card ol {
-    padding-left: 24px;
-    text-align: left;
-    line-height: 1.8;
-}
-
-/* Make Tracked Songs a wider centred card */
-
-#tracked-songs-card {
-    grid-column: 1 / -1;
-    width: min(100%, 650px);
-    justify-self: center;
-    min-height: 190px;
-}
-
-/* Stack the cards on smaller screens */
-
-@media (max-width: 750px) {
-    .statistics-panel {
-        grid-template-columns: 1fr;
-    }
-
-    #tracked-songs-card {
-        width: 100%;
-    }
-
-    .statistics-card {
-        min-height: 210px;
     }
 }
