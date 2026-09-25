@@ -1,42 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Unwrap</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unwrap Statistics</title>
 
-    <body>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <section class="top-panel" aria-labelledby="statistics-heading">
         <header class="site-header">
             <a class="logo" href="index.html" aria-label="Unwrap home">
-            <img src="images/unwrap-logo.svg" alt="Unwrap">
+                <img src="images/unwrap-logo.svg" alt="Unwrap">
             </a>
         </header>
 
-        <main>
-            <h1>Your Statistics</h1>
-            
-            <section class="statistics-container">
-                <section class="statistics-card" id="tracked-songs-card">
-                    <h2>Tracked Songs</h2>
-                    <p id="tracked-songs-value">77,345</p>
-                </section>
+        <div class="hero-content">
+            <h1 id="statistics-heading">Your Statistics</h1>
+        </div>
+    </section>
 
-                <section class="statistics-card" id="top-artist-card">
-                    <h2>Top Artist</h2>
-                    <p id="top-artist-value">Example Artist</p>
-                </section>
-
-                <section class="statistics-card" id="top-genre-card">
-                    <h2>Top Genre</h2>
-                    <p id="top-genre-value">Pop</p>
-                </section>
+    <main>
+        <section class="statistics-panel" aria-label="Your listening statistics">
+            <section class="statistics-card" id="tracked-songs-card">
+                <h2>Tracked Songs</h2>
+                <p id="tracked-songs-value">77,345</p>
             </section>
-        </main>
 
-        <footer class="site-footer">
-            <p>&copy; 2026 Unwrap</p>
-        </footer>
-    </body>
+            <section class="statistics-card" id="top-artist-card">
+                <h2>Top 3 Artists</h2>
+                <ol id="top-artist-value">
+                    <li>Arctic Monkeys</li>
+                    <li>The Weeknd</li>
+                    <li>Billie Eilish</li>
+                </ol>
+            </section>
+
+            <section class="statistics-card" id="top-genre-card">
+                <h2>Top 3 Genres</h2>
+                <ol id="top-genre-value">
+                    <li>Alternative</li>
+                    <li>Pop</li>
+                    <li>Hip-Hop</li>
+                </ol>
+            </section>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Unwrap</p>
+    </footer>
+</body>
 </html>
