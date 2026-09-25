@@ -1,39 +1,152 @@
-.logo img {
-  width: 80px;
-  height: auto;
-  display: block;
+* {
+    box-sizing: border-box;
 }
 
 body {
-    background-color: rgb(43, 0, 77); 
-    margin: 0.5rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    background-color: rgb(43, 0, 77);
     font-family: Arial, Helvetica, sans-serif;
     color: rgb(206, 129, 206);
 }
 
-ol {
-  display: inline-block;
-  text-align: left;
+.logo img {
+    width: 80px;
+    height: auto;
+    display: block;
 }
 
-h1 {
-    color: rgb(206, 129, 206)
-}
-
+h1,
 p {
-    color: rgb(206, 129, 206)
+    color: rgb(206, 129, 206);
+}
+
+ol {
+    display: inline-block;
+    text-align: left;
 }
 
 main {
+    flex: 1;
+    width: 100%;
     max-width: 900px;
-    margin: 25px auto;
+    margin: 0 auto;
+    padding: 55px 20px 0;
     text-align: center;
-    margin-top: 300px;
 }
 
-footer {
-    max-width: 900px;
-    margin: 25px auto;
+/* Landing page top panel */
+
+.top-panel {
+    position: relative;
+    min-height: 280px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(75, 25, 105);
+    border-bottom: 2px solid rgb(206, 129, 206);
+    border-radius: 0 0 24px 24px;
+}
+
+.top-panel .site-header {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
     text-align: center;
-    margin-top: 450px
+}
+
+.hero-content h1 {
+    margin: 0 0 20px;
+    color: rgb(206, 129, 206);
+    font-size: 4rem;
+}
+
+.hero-content p {
+    margin: 0;
+    color: rgb(206, 129, 206);
+    font-size: 1.25rem;
+    line-height: 1.5;
+}
+
+/* Landing page buttons */
+
+.landing-content {
+    width: min(100%, 620px);
+    margin: 0 auto;
+}
+
+.landing-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.landing-actions button {
+    width: 100%;
+    min-height: 65px;
+    padding: 15px 20px;
+    border: 0;
+    border-radius: 14px;
+    color: rgb(43, 0, 77);
+    background-color: rgb(206, 129, 206);
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.landing-actions button:hover {
+    background-color: rgb(225, 165, 225);
+}
+
+.landing-actions button:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 4px;
+}
+
+/* Footer */
+
+footer {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+/* Smaller screens */
+
+@media (max-width: 600px) {
+    .top-panel {
+        min-height: 250px;
+    }
+
+    .top-panel .site-header {
+        top: 15px;
+        left: 20px;
+    }
+
+    .hero-content {
+        padding-top: 25px;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    main {
+        padding-top: 40px;
+    }
 }

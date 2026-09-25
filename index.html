@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unwrap</title>
-  <!-- Styling will be written separately in styles.css -->
-  <link rel="stylesheet" href="styles.css">
-  <!-- Interactions will be written seperately in app.js -->
-   <script type="module" src="app.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unwrap</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="app.js" defer></script>
 </head>
 
 <body>
-    <header class="site-header">
-        <a class="logo" href="index.html" aria-label="Unwrap home">
-        <img src="images/unwrap-logo.svg" alt="Unwrap">
-        </a>
-    </header>
+    <section class="top-panel" aria-labelledby="welcome-heading">
+        <header class="site-header">
+            <a class="logo" href="index.html" aria-label="Unwrap home">
+                <img src="images/unwrap-logo.svg" alt="Unwrap">
+            </a>
+        </header>
+
+        <div class="hero-content">
+            <h1 id="welcome-heading">Unwrap</h1>
+
+            <p>
+                Discover your Spotify listening history and explore your music statistics.
+            </p>
+        </div>
+    </section>
 
     <main>
         <section class="landing-page" aria-labelledby="welcome-heading">
             <div class="landing-content">
-                <h1 id="welcome-heading">Unwrap</h1>
-
-                <p>
-                    Discover your Spotify listening history and explore your music statistics.
-                </p>
                 <div class="landing-actions">
                     <button id="login-button" type="button">
                         Login with Spotify
                     </button>
 
                     <button id="about-button" type="button">
-                        About  Unwrap
+                        About Unwrap
                     </button>
                 </div>
             </div>
