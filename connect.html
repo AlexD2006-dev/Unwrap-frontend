@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Connect Spotify | Unwrap</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="connect.js" defer></script>
+</head>
+
+<body>
+    <section class="top-panel" aria-labelledby="connect-heading">
+        <header class="site-header">
+            <a class="logo" href="index.html" aria-label="Unwrap home">
+                <img src="images/unwrap-logo.svg" alt="Unwrap">
+            </a>
+        </header>
+
+        <div class="hero-content">
+            <h1 id="connect-heading">Connect Spotify</h1>
+
+            <p>
+                Connect your Spotify account to unlock your listening
+                statistics.
+            </p>
+        </div>
+    </section>
+
+    <main class="landing-page-main" aria-label="Spotify connection">
+        <div class="landing-content">
+            <div class="landing-actions">
+                <button id="spotify-login-button" type="button">
+                    Continue with Spotify
+                </button>
+
+                <a href="about.html">About Unwrap</a>
+            </div>
+
+            <p id="connect-message" class="form-message" aria-live="polite"></p>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Unwrap</p>
+    </footer>
+</body>
+</html>
