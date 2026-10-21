@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Unwrap Account</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="auth.js" defer></script>
+</head>
+
+<body>
+    <section class="top-panel" aria-labelledby="account-heading">
+        <header class="site-header">
+            <a class="logo" href="index.html" aria-label="Unwrap home">
+                <img src="images/unwrap-logo.svg" alt="Unwrap">
+            </a>
+        </header>
+
+        <div class="hero-content">
+            <h1 id="account-heading">Your Unwrap Account</h1>
+
+            <p>
+                Create an Unwrap account or log in to connect Spotify and view
+                your listening statistics.
+            </p>
+        </div>
+    </section>
+
+    <main class="auth-main">
+        <section class="auth-card" aria-labelledby="create-account-heading">
+            <h2 id="create-account-heading">Create an account</h2>
+
+            <form id="register-form" class="auth-form">
+                <div class="form-field">
+                    <label for="register-email">Email</label>
+                    <input
+                        id="register-email"
+                        name="email"
+                        type="email"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="form-field">
+                    <label for="register-display-name">
+                        Display name
+                    </label>
+                    <input
+                        id="register-display-name"
+                        name="displayName"
+                        type="text"
+                        autocomplete="name"
+                        required
+                    >
+                </div>
+
+                <div class="form-field">
+                    <label for="register-password">Password</label>
+                    <input
+                        id="register-password"
+                        name="password"
+                        type="password"
+                        autocomplete="new-password"
+                        required
+                    >
+                </div>
+
+                <button class="primary-action" type="submit">
+                    Create account
+                </button>
+
+                <p
+                    id="register-message"
+                    class="form-message"
+                    aria-live="polite"
+                ></p>
+            </form>
+        </section>
+
+        <div class="auth-divider" aria-hidden="true">
+            <span>or</span>
+        </div>
+
+        <section class="auth-card" aria-labelledby="login-heading">
+            <h2 id="login-heading">Log in</h2>
+
+            <form id="login-form" class="auth-form">
+                <div class="form-field">
+                    <label for="login-email">Email</label>
+                    <input
+                        id="login-email"
+                        name="email"
+                        type="email"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="form-field">
+                    <label for="login-password">Password</label>
+                    <input
+                        id="login-password"
+                        name="password"
+                        type="password"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
+
+                <button class="primary-action" type="submit">
+                    Log in
+                </button>
+
+                <p
+                    id="login-message"
+                    class="form-message"
+                    aria-live="polite"
+                ></p>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Unwrap</p>
+    </footer>
+</body>
+</html>
