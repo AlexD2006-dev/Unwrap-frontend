@@ -46,7 +46,10 @@ describe("dashboard statistics", () => {
                         topTracks: [
                             {
                                 trackName: "Song One",
-                                artistNames: ["Artist One"],
+                                artistNames: [
+                                    "Artist One",
+                                    "Featured Artist",
+                                ],
                             },
                             {
                                 trackName: "Song Two",
@@ -96,7 +99,7 @@ describe("dashboard statistics", () => {
                     (item) => item.textContent,
                 ),
             ).toEqual([
-                "Song One - Artist One",
+                "Song One - Artist One, Featured Artist",
                 "Song Two - Artist Two",
                 "Song Three - Artist Three",
             ]);
@@ -155,17 +158,31 @@ describe("dashboard statistics", () => {
         });
     });
 
-    it("shows an error state when the backend request fails", async () => {
+    it("shows an error state when one backend request fails", async () => {
         renderDashboardShell();
 
         vi.spyOn(console, "error").mockImplementation(() => {});
 
-        const fetchMock = vi.fn().mockResolvedValue({
-            ok: false,
-            status: 401,
-            json: async () => ({
-                message: "Unauthorized",
-            }),
+        const fetchMock = vi.fn((url) => {
+            if (url.includes("/api/top-tracks")) {
+                return Promise.resolve({
+                    ok: false,
+                    status: 500,
+                    json: async () => ({
+                        message: "Track request failed",
+                    }),
+                });
+            }
+
+            return Promise.resolve({
+                ok: true,
+                json: async () => ({
+                    topArtists: [],
+                    statistics: {
+                        totalMs: 0,
+                    },
+                }),
+            });
         });
 
         vi.stubGlobal("fetch", fetchMock);
@@ -184,6 +201,57 @@ describe("dashboard statistics", () => {
             expect(
                 document.querySelector("#top-track-value").textContent,
             ).toContain("Statistics could not be loaded.");
+        });
+    });
+
+    it("handles a track without artist names", async () => {
+        renderDashboardShell();
+
+        const fetchMock = vi.fn((url) => {
+            if (url.includes("/api/top-artists")) {
+                return Promise.resolve({
+                    ok: true,
+                    json: async () => ({
+                        topArtists: [{ artistName: "Artist One" }],
+                    }),
+                });
+            }
+
+            if (url.includes("/api/top-tracks")) {
+                return Promise.resolve({
+                    ok: true,
+                    json: async () => ({
+                        topTracks: [
+                            {
+                                trackName: "Instrumental Track",
+                            },
+                        ],
+                    }),
+                });
+            }
+
+            return Promise.resolve({
+                ok: true,
+                json: async () => ({
+                    statistics: {
+                        totalMs: 60000,
+                    },
+                }),
+            });
+        });
+
+        vi.stubGlobal("fetch", fetchMock);
+
+        await import("../dashboard.js");
+
+        await vi.waitFor(() => {
+            expect(
+                document.querySelector("#top-track-value").textContent,
+            ).toContain("Instrumental Track");
+
+            expect(
+                document.querySelector("#total-time-value").textContent,
+            ).toBe("1m");
         });
     });
 });
