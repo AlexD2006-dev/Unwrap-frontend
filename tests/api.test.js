@@ -1,5 +1,9 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { loginUser, registerUser } from "../api.js";
+import {
+    getTopArtists,
+    loginUser,
+    registerUser,
+} from "../api.js";
 
 describe("frontend API client", () => {
     afterEach(() => {
@@ -79,5 +83,37 @@ describe("frontend API client", () => {
                 password: "wrong-password",
             }),
         ).rejects.toThrow("Invalid credentials");
+    });
+
+    it("requests top artists with the requested limit", async () => {
+        const fetchMock = vi.fn().mockResolvedValue({
+            ok: true,
+            json: async () => ({
+                topArtists: [],
+            }),
+        });
+
+        vi.stubGlobal("fetch", fetchMock);
+
+        await getTopArtists(5);
+
+        const [url, options] = fetchMock.mock.calls[0];
+
+        expect(url).toBe(
+            "http://127.0.0.1:3000/api/top-artists?limit=5",
+        );
+        expect(options.credentials).toBe("include");
+    });
+
+    it("reports a network failure", async () => {
+        const fetchMock = vi.fn().mockRejectedValue(
+            new Error("Network unavailable"),
+        );
+
+        vi.stubGlobal("fetch", fetchMock);
+
+        await expect(getTopArtists()).rejects.toThrow(
+            "Network unavailable",
+        );
     });
 });
