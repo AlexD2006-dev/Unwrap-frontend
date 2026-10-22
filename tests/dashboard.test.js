@@ -2,6 +2,15 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 function renderDashboardShell() {
     document.body.innerHTML = `
+        <button
+            id="refresh-statistics-button"
+            type="button"
+        >
+            Refresh statistics
+        </button>
+
+        <p id="refresh-message"></p>
+
         <p id="total-time-value">Loading...</p>
 
         <ol id="top-artist-value">
@@ -252,6 +261,186 @@ describe("dashboard statistics", () => {
             expect(
                 document.querySelector("#total-time-value").textContent,
             ).toBe("1m");
+        });
+    });
+
+    it("refreshes statistics when the refresh button is clicked", async () => {
+        renderDashboardShell();
+
+        const successfulResponse = (data) => ({
+            ok: true,
+            json: async () => data,
+        });
+
+        const fetchMock = vi.fn()
+            .mockResolvedValueOnce(
+                successfulResponse({
+                    topArtists: [{ artistName: "Initial Artist" }],
+                }),
+            )
+            .mockResolvedValueOnce(
+                successfulResponse({
+                    topTracks: [
+                        {
+                            trackName: "Initial Song",
+                            artistNames: ["Initial Artist"],
+                        },
+                    ],
+                }),
+            )
+            .mockResolvedValueOnce(
+                successfulResponse({
+                    statistics: {
+                        totalMs: 3720000,
+                    },
+                }),
+            )
+            .mockResolvedValueOnce(
+                successfulResponse({
+                    topArtists: [{ artistName: "Updated Artist" }],
+                }),
+            )
+            .mockResolvedValueOnce(
+                successfulResponse({
+                    topTracks: [
+                        {
+                            trackName: "Updated Song",
+                            artistNames: ["Updated Artist"],
+                        },
+                    ],
+                }),
+            )
+            .mockResolvedValueOnce(
+                successfulResponse({
+                    statistics: {
+                        totalMs: 7200000,
+                    },
+                }),
+            );
+
+        vi.stubGlobal("fetch", fetchMock);
+
+        await import("../dashboard.js");
+
+        await vi.waitFor(() => {
+            expect(
+                document.querySelector("#total-time-value").textContent,
+            ).toBe("1h 2m");
+        });
+
+        const refreshButton = document.querySelector(
+            "#refresh-statistics-button",
+        );
+
+        refreshButton.click();
+
+        expect(refreshButton.disabled).toBe(true);
+        expect(refreshButton.textContent).toBe("Refreshing...");
+
+        await vi.waitFor(() => {
+            expect(
+                document.querySelector("#refresh-message").textContent,
+            ).toBe("Statistics updated.");
+
+            expect(
+                document.querySelector("#top-artist-value").textContent,
+            ).toContain("Updated Artist");
+
+            expect(
+                document.querySelector("#top-track-value").textContent,
+            ).toContain("Updated Song - Updated Artist");
+
+            expect(
+                document.querySelector("#total-time-value").textContent,
+            ).toBe("2h 0m");
+        });
+
+        expect(refreshButton.disabled).toBe(false);
+        expect(refreshButton.textContent).toBe("Refresh statistics");
+    });
+
+    it("shows a refresh error when refreshing statistics fails", async () => {
+        renderDashboardShell();
+
+        vi.spyOn(console, "error").mockImplementation(() => {});
+
+        const successfulResponse = (data) => ({
+            ok: true,
+            json: async () => data,
+        });
+
+        const fetchMock = vi.fn()
+            .mockResolvedValueOnce(
+                successfulResponse({
+                    topArtists: [{ artistName: "Initial Artist" }],
+                }),
+            )
+            .mockResolvedValueOnce(
+                successfulResponse({
+                    topTracks: [
+                        {
+                            trackName: "Initial Song",
+                            artistNames: ["Initial Artist"],
+                        },
+                    ],
+                }),
+            )
+            .mockResolvedValueOnce(
+                successfulResponse({
+                    statistics: {
+                        totalMs: 3720000,
+                    },
+                }),
+            )
+            .mockResolvedValueOnce({
+                ok: false,
+                status: 500,
+                json: async () => ({
+                    message: "Refresh failed",
+                }),
+            })
+            .mockResolvedValueOnce(
+                successfulResponse({
+                    topTracks: [],
+                }),
+            )
+            .mockResolvedValueOnce(
+                successfulResponse({
+                    statistics: {
+                        totalMs: 0,
+                    },
+                }),
+            );
+
+        vi.stubGlobal("fetch", fetchMock);
+
+        await import("../dashboard.js");
+
+        await vi.waitFor(() => {
+            expect(
+                document.querySelector("#total-time-value").textContent,
+            ).toBe("1h 2m");
+        });
+
+        const refreshButton = document.querySelector(
+            "#refresh-statistics-button",
+        );
+
+        refreshButton.click();
+
+        await vi.waitFor(() => {
+            expect(
+                document.querySelector("#refresh-message").textContent,
+            ).toBe("Statistics could not be refreshed.");
+
+            expect(
+                document.querySelector("#total-time-value").textContent,
+            ).toBe("Unavailable");
+
+            expect(refreshButton.disabled).toBe(false);
+            expect(refreshButton.textContent).toBe(
+                "Refresh statistics",
+            );
         });
     });
 });

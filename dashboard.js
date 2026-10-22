@@ -7,6 +7,10 @@ import {
 const topArtistValue = document.querySelector("#top-artist-value");
 const topTrackValue = document.querySelector("#top-track-value");
 const totalTimeValue = document.querySelector("#total-time-value");
+const refreshButton = document.querySelector(
+    "#refresh-statistics-button",
+);
+const refreshMessage = document.querySelector("#refresh-message");
 
 function showListMessage(list, message) {
     list.replaceChildren();
@@ -65,7 +69,18 @@ function formatListeningTime(totalMs) {
     return `${hours}h ${minutes}m`;
 }
 
-async function loadDashboardStatistics() {
+async function loadDashboardStatistics({ isRefresh = false } = {}) {
+    if (refreshButton) {
+        refreshButton.disabled = true;
+        refreshButton.textContent = isRefresh
+            ? "Refreshing..."
+            : "Loading...";
+    }
+
+    if (isRefresh && refreshMessage) {
+        refreshMessage.textContent = "Refreshing statistics...";
+    }
+
     try {
         const [
             artistsResponse,
@@ -84,6 +99,10 @@ async function loadDashboardStatistics() {
             listeningTimeResponse.statistics?.totalMs ?? 0;
 
         totalTimeValue.textContent = formatListeningTime(totalMs);
+
+        if (isRefresh && refreshMessage) {
+            refreshMessage.textContent = "Statistics updated.";
+        }
     } catch (error) {
         console.error("Failed to load dashboard statistics:", error);
 
@@ -96,7 +115,23 @@ async function loadDashboardStatistics() {
             topTrackValue,
             "Statistics could not be loaded.",
         );
+
+        if (isRefresh && refreshMessage) {
+            refreshMessage.textContent =
+                "Statistics could not be refreshed.";
+        }
+    } finally {
+        if (refreshButton) {
+            refreshButton.disabled = false;
+            refreshButton.textContent = "Refresh statistics";
+        }
     }
+}
+
+if (refreshButton) {
+    refreshButton.addEventListener("click", () => {
+        loadDashboardStatistics({ isRefresh: true });
+    });
 }
 
 loadDashboardStatistics();

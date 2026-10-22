@@ -292,6 +292,51 @@ main {
     line-height: 1.8;
 }
 
+.dashboard-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding-top: 4px;
+}
+
+.refresh-button {
+    min-width: 230px;
+    min-height: 52px;
+    padding: 12px 22px;
+    border: 2px solid var(--text-purple);
+    border-radius: 14px;
+    color: var(--background-purple);
+    background-color: var(--text-purple);
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.refresh-button:hover {
+    background-color: var(--hover-purple);
+    transform: translateY(-2px);
+}
+
+.refresh-button:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 4px;
+}
+
+.refresh-button:disabled {
+    opacity: 0.7;
+    cursor: wait;
+    transform: none;
+}
+
+#refresh-message {
+    min-height: 24px;
+    margin: 0;
+    color: var(--text-purple);
+    font-size: 0.95rem;
+}
+
 /* About page cards */
 
 .about-panel {
@@ -399,5 +444,10 @@ footer,
 
     .auth-card {
         padding: 24px 20px;
+    }
+
+    .refresh-button {
+        width: 100%;
+        max-width: 300px;
     }
 }
