@@ -9,6 +9,7 @@ function renderConnectPage() {
     `;
 }
 
+// Use a controlled browser-like page so redirects can be tested safely.
 async function loadConnectPage(search = "") {
     renderConnectPage();
 

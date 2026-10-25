@@ -14,6 +14,7 @@ const mocks = vi.hoisted(() => ({
     getTimeListened: vi.fn(),
 }));
 
+// Controlled responses let this test cover the multi-page frontend flow without real Spotify requests.
 vi.mock("../api.js", () => mocks);
 
 const authPageMarkup = `

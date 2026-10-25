@@ -12,6 +12,7 @@ const mocks = vi.hoisted(() => ({
     registerUser: vi.fn(),
 }));
 
+// Mock the API so these tests focus on authentication-page behaviour.
 vi.mock("../api.js", () => mocks);
 
 const authPageMarkup = `
@@ -143,9 +144,21 @@ describe("authentication page", () => {
 
         await loadAuthPage();
 
-        fillInput("#register-form", "email", "existing@example.com");
-        fillInput("#register-form", "displayName", "Existing User");
-        fillInput("#register-form", "password", "strong-password");
+        fillInput(
+            "#register-form",
+            "email",
+            "existing@example.com",
+        );
+        fillInput(
+            "#register-form",
+            "displayName",
+            "Existing User",
+        );
+        fillInput(
+            "#register-form",
+            "password",
+            "strong-password",
+        );
 
         submitForm("#register-form");
         await waitForAsyncHandler();
@@ -159,7 +172,9 @@ describe("authentication page", () => {
 
     test("registration succeeds but shows a fallback when automatic login fails", async () => {
         mocks.registerUser.mockResolvedValueOnce({});
-        mocks.loginUser.mockRejectedValueOnce(new Error("Login failed"));
+        mocks.loginUser.mockRejectedValueOnce(
+            new Error("Login failed"),
+        );
 
         await loadAuthPage();
 

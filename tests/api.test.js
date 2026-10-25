@@ -6,6 +6,7 @@ import {
 } from "../api.js";
 
 describe("frontend API client", () => {
+    // These tests use mocked requests so they do not depend on the real backend.
     afterEach(() => {
         vi.unstubAllGlobals();
     });
