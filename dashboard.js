@@ -82,6 +82,7 @@ async function loadDashboardStatistics({ isRefresh = false } = {}) {
     }
 
     try {
+        // These requests are independent, so they can run concurrently.
         const [
             artistsResponse,
             tracksResponse,
@@ -121,6 +122,7 @@ async function loadDashboardStatistics({ isRefresh = false } = {}) {
                 "Statistics could not be refreshed.";
         }
     } finally {
+        // Refresh only requests current statistics; it does not import new Spotify history.
         if (refreshButton) {
             refreshButton.disabled = false;
             refreshButton.textContent = "Refresh statistics";

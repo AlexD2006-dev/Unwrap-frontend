@@ -11,6 +11,7 @@ function showMessage(element, message, isError = false) {
     element.setAttribute("data-error", String(isError));
 }
 
+// Keep demo mode in the URL so demo users can complete the same flow without backend authentication.
 function getConnectPageUrl() {
     const isDemoMode =
         new URLSearchParams(window.location.search).get("demo") === "true";
@@ -43,6 +44,7 @@ if (registerForm) {
 
         showMessage(registerMessage, "Account created. Logging you in...");
 
+        // Registration creates the account; a separate login establishes the session used by the next page.
         try {
             await loginUser({
                 email,

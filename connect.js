@@ -6,11 +6,13 @@ const spotifyLoginButton = document.querySelector(
 
 const connectMessage = document.querySelector("#connect-message");
 
+// Demo mode keeps the connection page usable without Spotify or the backend running.
 const isDemoMode =
     new URLSearchParams(window.location.search).get("demo") === "true";
 
 if (spotifyLoginButton) {
     spotifyLoginButton.addEventListener("click", () => {
+        // Prevent repeated clicks from starting duplicate redirects.
         spotifyLoginButton.disabled = true;
 
         if (isDemoMode) {

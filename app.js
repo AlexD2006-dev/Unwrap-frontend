@@ -9,6 +9,7 @@ export function getPageForButton(buttonId) {
     }
 }
 
+// Preserve demo mode while moving between frontend pages.
 function getPageUrl(page) {
     const isDemoMode =
         new URLSearchParams(window.location.search).get("demo") === "true";
@@ -19,7 +20,6 @@ function getPageUrl(page) {
 const loginButton = document.querySelector("#login-button");
 
 function handleLoginClick() {
-    console.log("Login button clicked");
     const page = getPageForButton("login-button");
     window.location.href = getPageUrl(page);
 }
@@ -27,7 +27,6 @@ function handleLoginClick() {
 const aboutButton = document.querySelector("#about-button");
 
 function handleAboutClick() {
-    console.log("About button clicked");
     const page = getPageForButton("about-button");
     window.location.href = getPageUrl(page);
 }

@@ -1,5 +1,6 @@
 const BACKEND_URL = "http://127.0.0.1:3000";
 
+// Demo mode lets the deployed frontend be tested without backend credentials.
 const DEMO_MODE =
     typeof window !== "undefined" &&
     new URLSearchParams(window.location.search).get("demo") === "true";
@@ -8,6 +9,8 @@ export function isDemoMode() {
     return DEMO_MODE;
 }
 
+// Keep authentication, JSON handling, and backend error messages consistent
+// across all frontend API requests.
 async function requestBackend(path, options = {}) {
     const response = await fetch(`${BACKEND_URL}${path}`, {
         ...options,
