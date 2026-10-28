@@ -19,6 +19,7 @@ Landing page
 
 Frontend repository: https://github.com/AlexD2006-dev/Unwrap-frontend  
 Backend repository: https://github.com/AlexD2006-dev/Unwrap
+Backend integration branch: https://github.com/AlexD2006-dev/Unwrap/tree/frontend-backend-integration
 
 ## Documentation audiences
 
