@@ -143,6 +143,9 @@ Landing page
     -> refresh statistics
 ```
 
+The live frontend demo is available here:
+[Open the Unwrap frontend demo](https://alexd2006-dev.github.io/Unwrap-frontend/index.html?demo=true)
+
 ## Known limitations
 
 Spotify listening history belongs to the connected Spotify account rather than to one individual person. If several people share an account, the imported statistics may contain listening data from all users of that account.

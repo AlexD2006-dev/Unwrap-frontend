@@ -123,6 +123,9 @@ For example:
 http://127.0.0.1:5500/index.html?demo=true
 ```
 
+The live frontend demo is available here:
+[Open the Unwrap frontend demo](https://alexd2006-dev.github.io/Unwrap-frontend/index.html?demo=true)
+
 Demo mode:
 
 - Uses controlled registration responses.
