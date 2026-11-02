@@ -163,29 +163,38 @@ The dashboard handles:
 The refresh button requests the latest statistics currently available from the backend. It does not trigger a new Spotify history import. If the backend data has not changed, the displayed statistics may remain the same.
 
 ## Architecture diagram
+
 ```mermaid
-flowchart TD
-    U[User] --> F[Frontend pages]
+flowchart LR
+    U([User]) --> L[Landing page]
 
-    F --> A[Authentication page]
-    F --> C[Spotify connection page]
-    F --> D[Dashboard page]
+    L -->|About| A[About page]
+    L -->|Login or register| AU[Authentication page]
 
-    A --> API[Frontend API module]
-    C --> API
-    D --> API
+    AU -->|Send credentials| API[Frontend API module]
+    API -->|Authenticate user| B[Existing Unwrap backend]
+    B -->|Successful authentication| C[Spotify connection page]
 
-    API --> B[Existing Unwrap backend]
+    C -->|About| A
+    C -->|Connect to Spotify| B
 
-    B --> AUTH[Authentication]
-    B --> OAUTH[Spotify authorisation]
-    B --> IMPORT[Listening-history import]
-    B --> DB[(Database)]
-    B --> STATS[Statistics endpoints]
+    B -->|Start authorisation| S[Spotify]
+    S -->|Permission granted| B
 
-    OAUTH --> S[Spotify]
-    IMPORT --> DB
-    STATS --> D
+    B -->|Import listening history| DB[(Database)]
+    B -->|Return statistics| API
+    API --> D[Statistics dashboard]
+
+    D -->|Refresh statistics| API
+    API -->|Updated statistics| D
+
+    classDef frontend fill:#e8f1ff,stroke:#3b82f6,color:#111
+    classDef backend fill:#fff3df,stroke:#e08a00,color:#111
+    classDef external fill:#e9f8ef,stroke:#2f9e5f,color:#111
+
+    class L,A,AU,C,D,API frontend
+    class B,DB backend
+    class S external
 ```
 
 ## Clean code and comments
