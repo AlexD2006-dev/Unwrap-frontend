@@ -12,6 +12,18 @@ const refreshButton = document.querySelector(
 );
 const refreshMessage = document.querySelector("#refresh-message");
 
+// Preserve demo mode when returning to the landing page through the logo.
+const dashboardLogoLink = document.querySelector("a.logo");
+
+if (dashboardLogoLink) {
+    const dashboardDemoMode =
+        new URLSearchParams(window.location.search).get("demo") === "true";
+
+    dashboardLogoLink.href = dashboardDemoMode
+        ? "index.html?demo=true"
+        : "index.html";
+}
+
 function showListMessage(list, message) {
     list.replaceChildren();
 

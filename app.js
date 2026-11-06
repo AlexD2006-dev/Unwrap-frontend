@@ -17,6 +17,13 @@ function getPageUrl(page) {
     return isDemoMode ? `${page}?demo=true` : page;
 }
 
+// Preserve demo mode when clicking the logo on the landing page.
+const logoLink = document.querySelector("a.logo");
+
+if (logoLink) {
+    logoLink.href = getPageUrl("index.html");
+}
+
 const loginButton = document.querySelector("#login-button");
 
 function handleLoginClick() {

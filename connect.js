@@ -10,6 +10,15 @@ const connectMessage = document.querySelector("#connect-message");
 const isDemoMode =
     new URLSearchParams(window.location.search).get("demo") === "true";
 
+// Preserve demo mode when returning to the landing page through the logo.
+const connectLogoLink = document.querySelector("a.logo");
+
+if (connectLogoLink) {
+    connectLogoLink.href = isDemoMode
+        ? "index.html?demo=true"
+        : "index.html";
+}
+
 if (spotifyLoginButton) {
     spotifyLoginButton.addEventListener("click", () => {
         // Prevent repeated clicks from starting duplicate redirects.

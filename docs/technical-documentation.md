@@ -165,36 +165,22 @@ The refresh button requests the latest statistics currently available from the b
 ## Architecture diagram
 
 ```mermaid
-flowchart LR
-    U([User]) --> L[Landing page]
+flowchart TD
 
-    L -->|About| A[About page]
-    L -->|Login or register| AU[Authentication page]
+    U("[User]") --> L[Landing page]
 
-    AU -->|Send credentials| API[Frontend API module]
-    API -->|Authenticate user| B[Existing Unwrap backend]
-    B -->|Successful authentication| C[Spotify connection page]
+    L -->|About button| A[About page]
+    L -->|Log in to Unwrap| LR[Login / Register page]
 
-    C -->|About| A
-    C -->|Connect to Spotify| B
+    LR -->|Login / Register| C[Connection page]
+    C -->|About button| A
+    C -->|Connect to Spotify| AU[Spotify authorization page]
 
-    B -->|Start authorisation| S[Spotify]
-    S -->|Permission granted| B
+    AU -->|Authorize| S[Statistics page]
 
-    B -->|Import listening history| DB[(Database)]
-    B -->|Return statistics| API
-    API --> D[Statistics dashboard]
-
-    D -->|Refresh statistics| API
-    API -->|Updated statistics| D
-
-    classDef frontend fill:#e8f1ff,stroke:#3b82f6,color:#111
-    classDef backend fill:#fff3df,stroke:#e08a00,color:#111
-    classDef external fill:#e9f8ef,stroke:#2f9e5f,color:#111
-
-    class L,A,AU,C,D,API frontend
-    class B,DB backend
-    class S external
+    C -->|Logo / Home| L
+    LR -->|Logo / Home| L
+    S -->|Logo / Home| L
 ```
 
 ## Clean code and comments

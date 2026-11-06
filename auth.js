@@ -19,6 +19,18 @@ function getConnectPageUrl() {
     return isDemoMode ? "connect.html?demo=true" : "connect.html";
 }
 
+// Preserve demo mode when returning to the landing page through the logo.
+const authLogoLink = document.querySelector("a.logo");
+
+if (authLogoLink) {
+    const authDemoMode =
+        new URLSearchParams(window.location.search).get("demo") === "true";
+
+    authLogoLink.href = authDemoMode
+        ? "index.html?demo=true"
+        : "index.html";
+}
+
 if (registerForm) {
     registerForm.addEventListener("submit", async (event) => {
         event.preventDefault();
